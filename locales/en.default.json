@@ -711,7 +711,11 @@
             "add_to_cart": "Add to Cart",
             "details_tab": "Product details",
             "vat": "Inc VAT",
-            "subscription_period": "Subscription with a period:"
+            "subscription_period": "Subscription with a period:",
+            "reviews_tab": "Reviews", 
+            "review": {
+                "comment":  "Comment"
+            }
         },
         "compare_list": {
             "add_to_compare": "Add to compare",

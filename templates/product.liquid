@@ -182,6 +182,58 @@
             </div>
         </div>
         {% endif %}
+
+        {% if product.customer_reviews.size > 0  %}
+        <ul class="tabs">
+            <li class="active">
+                <a href="#">{{ 'products.product.reviews_tab' | t }} <sup class="sup">{{ product.customer_reviews.size }}</sup></a>
+            </li>
+        </ul>
+        <div class="reviews-list">
+        {% for review in product.customer_reviews %}
+	    <article class="review-wrap">
+		    <div class="review-container">
+			    <aside class="info">
+				    <span itemprop="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating" class="rating info-block detail-rating">
+					    <meta itemprop="ratingValue" content="{{ review.rating }}">
+					    <div title="{{ review.rating }}" class="stars">
+						    <div class="fill" style="width: 100%;"></div>
+					    </div>
+				    </span>
+				    <time datetime="{{ review.created_date_tick }}" class="info-block date">{{ review.localized_created_date }}</time>
+			    </aside>
+			    <div class="review">
+				    <div class="review-main-info">
+					    <div class="author">
+						    <a href="#" class="author-name link">{{ review.author_nickname }}</a>
+						    <span class="author-info"></span>
+					    </div>
+					    <div class="info">
+						    <div class="comment">
+							    <div class="comment-wrap">	
+								    <div class="comment-block">
+									    <h3 class="comment-title">{{ 'products.product.review.comment' | t }}</h3>
+									    <p class="comment-text">{{ review.content }}</p>
+								    </div>
+							    </div>
+						    </div>
+						    <div class="votes">
+							    <div class="vote-block">
+								    <button class="icon icon-up"></button>{{ review.like_count }}
+							    </div>
+							    <div class="vote-block">
+								    <button class="icon icon-down"></button>{{ review.dislike_count }}
+							    </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+	    </article>
+        {% endfor %}
+        </div>
+        {% endif %}
+
     </div>
 </div>
 

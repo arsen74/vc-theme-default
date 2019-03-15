@@ -133,3 +133,46 @@
 {
 	margin: 0 0 0 210px;
 }
+
+.reviews-list {
+    padding-right: 0;
+    box-sizing: border-box;
+}
+.review-wrap {
+    margin-bottom: 32px;
+}
+.review-container {
+    display: flex;
+}
+    .review-container .info {
+        display: flex;
+        width: 140px;
+        flex-direction: column;
+        flex-shrink: 0;
+        padding: 4px 0 0;
+        line-height: 20px;
+    }
+.detail-rating {
+    padding-right: 20px;
+    margin-bottom: 8px;
+}
+.info-block {
+    box-sizing: border-box;
+    line-height: 19px;
+}
+    .info-block.date {
+        margin-top: 2px;
+        letter-spacing: -.1px;
+        color: gray;
+    }
+.rating {
+    color: #333;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin-right: 15px;
+}
+.review {
+    width: 100%;
+}
