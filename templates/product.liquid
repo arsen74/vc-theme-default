@@ -30,7 +30,19 @@
 
     <div class="grid-item large--three-fifths">
         <h2 itemprop="name">{{ product.title }}</h2>
-
+        {% if product.rating > 0 %}
+        <div class="review-bottom">
+            <span itemprop="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating" class="rating subitem">
+                <meta itemprop="ratingValue" content="{{ product.rating }}">
+                <meta itemprop="reviewCount" content="{{ product.customer_reviews.size }}">
+                <div title="{{ product.rating }}" class="stars">
+                    <div class="fill" style="width:{{product.reviews_rating_percentage}}%;">
+                    </div>
+                </div>
+		        {{ product.customer_reviews.size }}&nbsp;{{ 'products.product.reviews_tab' | t }}
+	        </span>
+        </div>
+        {% endif %}
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
             {% assign variant = product.selected_or_first_available_variant %}
@@ -197,7 +209,7 @@
 				    <span itemprop="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating" class="rating info-block detail-rating">
 					    <meta itemprop="ratingValue" content="{{ review.rating }}">
 					    <div title="{{ review.rating }}" class="stars">
-						    <div class="fill" style="width: 100%;"></div>
+						    <div class="fill" style="width: {{review.rating_percentage}}%;"></div>
 					    </div>
 				    </span>
 				    <time datetime="{{ review.created_date_tick }}" class="info-block date">{{ review.localized_created_date }}</time>
@@ -209,7 +221,7 @@
 						    <span class="author-info"></span>
 					    </div>
 					    <div class="info">
-						    <div class="comment">
+						    <div class="review-comment">
 							    <div class="comment-wrap">	
 								    <div class="comment-block">
 									    <h3 class="comment-title">{{ 'products.product.review.comment' | t }}</h3>

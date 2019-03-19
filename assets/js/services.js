@@ -253,3 +253,17 @@ storefrontApp.service('orderService', ['$http', function ($http) {
         }
     }
 }]);
+
+storefrontApp.service('customerReviewService', ['$http', function ($http) {
+    return {
+        createReview: function (productId, customerReviewData) {
+            return $http.post('storefrontapi/product/' + productId + '/customerReviews', customerReviewData);
+        },
+        likeReview: function (productId, customerReviewId) {
+            return $http.post('storefrontapi/product/' + productId + '/customerReviews/' + customerReviewId + '/like');
+        },
+        dislikeReview: function (productId, customerReviewId) {
+            return $http.delete('storefrontapi/product/' + productId + '/customerReviews/' + customerReviewId + '/like');
+        }
+    }
+}]);
