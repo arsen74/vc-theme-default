@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'customerService', 'listService', '$localStorage',
-    function ($rootScope, $scope, $window, dialogService, catalogService, cartService, quoteRequestService, customerService, listService, $localStorage) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'customerService', 'listService', 'customerReviewService', '$localStorage',
+    function ($rootScope, $scope, $window, dialogService, catalogService, cartService, quoteRequestService, customerService, listService, customerReviewService, $localStorage) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -43,6 +43,20 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             quoteRequestService.addProductToQuoteRequest(product.id, quantity).then(function (response) {
                 $rootScope.$broadcast('actualQuoteRequestItemsChanged');
             });
+        };
+        $scope.addNewCustomerReview = function (product, customer) {
+            var dialogData = {
+                productId: product.id,
+                createdBy: customer.contact.id,
+                authorNickname: customer.fullName
+            };
+            dialogService.showDialog(dialogData, 'newCustomerReviewDialogController', 'storefront.new-customer-review-dialog.tpl');
+        };
+        $scope.likeReview = function (productId, reviewId, customer) {
+            customerReviewService.likeReview(productId, reviewId, customer.contact.id);
+        };
+        $scope.dislikeReview = function (productId, reviewId, customer) {
+            customerReviewService.dislikeReview(productId, reviewId, customer.contact.id);
         };
         
         $scope.initAvailableLists = function(lists) {
@@ -141,4 +155,20 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         };
 
         initialize();
+    }]);
+
+
+storefrontApp.controller('newCustomerReviewDialogController', ['$scope', 'customerReviewService', '$uibModalInstance', 'dialogData',
+    function ($scope, customerReviewService, $uibModalInstance, dialogData) {
+        
+        $scope.dialogData = dialogData;
+
+        $scope.close = function () {
+            $uibModalInstance.close();
+        }
+
+        $scope.createReview = function () {
+            customerReviewService.createReview($scope.dialogData);
+            $uibModalInstance.close();
+        }
     }]);

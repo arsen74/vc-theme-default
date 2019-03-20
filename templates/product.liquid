@@ -194,13 +194,22 @@
             </div>
         </div>
         {% endif %}
-
-        {% if product.customer_reviews.size > 0  %}
+                
         <ul class="tabs">
             <li class="active">
                 <a href="#">{{ 'products.product.reviews_tab' | t }} <sup class="sup">{{ product.customer_reviews.size }}</sup></a>
             </li>
         </ul>
+        <div class="new-review-popup">
+            <form>
+                <button id="addnewCustomerReview" class="btn btn-clearfix" type="button" 
+                         ng-show="customer.isRegisteredUser"
+                         ng-click="addNewCustomerReview(selectedVariation, customer)">
+                      <span class="fa fa-plus list-icon-clearfix"></span>
+                      <span>{{ 'products.product.review.add_new' | t }}</span>                      
+                 </button>
+            </form>
+        </div>
         <div class="reviews-list">
         {% for review in product.customer_reviews %}
 	    <article class="review-wrap">
@@ -231,10 +240,10 @@
 						    </div>
 						    <div class="votes">
 							    <div class="vote-block">
-								    <button class="icon icon-up"></button>{{ review.like_count }}
+                                    <button class="icon icon-up" ng-click="likeReview('{{review.product_id}}', '{{ review.id }}', customer)"></button>{{ review.like_count }}
 							    </div>
 							    <div class="vote-block">
-								    <button class="icon icon-down"></button>{{ review.dislike_count }}
+                                    <button class="icon icon-down" ng-click="dislikeReview('{{review.product_id}}', '{{ review.id }}', customer)"></button>{{ review.dislike_count }}
 							    </div>
 						    </div>
 					    </div>
@@ -244,7 +253,6 @@
 	    </article>
         {% endfor %}
         </div>
-        {% endif %}
 
     </div>
 </div>

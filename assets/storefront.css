@@ -234,3 +234,40 @@
 .review {
     width: 100%;
 }
+.set-rating {
+    position: relative;
+    direction: rtl;
+    font-size: 0;
+}
+    .set-rating > input {
+        width: 0;
+        height: 0;
+        margin: 0;
+        opacity: 0;
+    }
+        .set-rating > input + label {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-indent: 9999px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+            .set-rating.\:hover > input + label,
+            .set-rating:hover > input + label,
+            .set-rating > input + label {
+                background: 0 0 url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMid' viewBox='0 0 15 15'%3E%3Cpath class='st0' fill='%23c8c8ce' d='M7.5 0l2.3 4.9 5.2.8-3.7 3.8.9 5.4-4.6-2.6L2.9 15l.9-5.4L0 5.7l5.2-.8L7.5 0z'/%3E%3C/svg%3E") no-repeat
+            }
+                .set-rating.\:hover > input + label.\:hover,
+                .set-rating.\:hover > input + label.\:hover ~ label,
+                .set-rating:hover > input + label:hover ~ label,
+                .set-rating:hover > input + label:hover,
+                .set-rating > input + label.\:hover,
+                .set-rating > input + label.\:hover ~ label,
+                .set-rating > input + label:hover ~ label,
+                .set-rating > input + label:hover,
+                .set-rating > input:checked ~ label {
+                    background: 0 0 url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMid' viewBox='0 0 15 15'%3E%3Cpath class='st0' fill='%23FEC71C' d='M7.5 0l2.3 4.9 5.2.8-3.7 3.8.9 5.4-4.6-2.6L2.9 15l.9-5.4L0 5.7l5.2-.8L7.5 0z'/%3E%3C/svg%3E") no-repeat
+                }
